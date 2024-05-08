@@ -10,10 +10,12 @@
     <table>
         <tr>
             <th>Tasks</th>
+            <th></th>
         </tr>
         {% for task in tasks %}
         <tr>
             <td>{{task.title}}</td>
+            <td><a href="{% url 'task' task.id %}">Details</a></td>
         </tr>
         {% empty %}
         <h3>No task yet</h3>
