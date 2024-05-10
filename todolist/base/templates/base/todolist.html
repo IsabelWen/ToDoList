@@ -16,7 +16,9 @@
         {% for task in tasks %}
         <tr>
             <td>{{task.title}}</td>
+            <td><a href="{% url 'edit-task' task.id %}">Edit</a></td>
             <td><a href="{% url 'task' task.id %}">Details</a></td>
+            <td><a href="{% url 'delete-task' task.id %}">Delete</a></td>
         </tr>
         {% empty %}
         <h3>No task yet</h3>
