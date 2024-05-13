@@ -1,4 +1,6 @@
 # Django imports
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -23,6 +25,13 @@ class ToDoList(LoginRequiredMixin, ListView):
     context_object_name = 'tasks'
     template_name = 'base/todolist.html'
 
+    # Function to only show user his own tasks
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(user=self.request.user)
+        context['count'] = context['tasks'].filter(complete=False).count()
+        return context
+
 class TaskDetails(LoginRequiredMixin, DetailView):
     model = Task
     context_object_name = 'task'
@@ -30,12 +39,17 @@ class TaskDetails(LoginRequiredMixin, DetailView):
 
 class CreateTask(LoginRequiredMixin, CreateView):
     model = Task
-    fields  = '__all__'
+    fields  = ['title', 'description', 'complete']
     success_url = reverse_lazy('todo')
+
+    # Add task only to the currents user todo-list
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CreateTask, self).form_valid(form)
 
 class EditTask(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = '__all__'
+    fields = ['title', 'description', 'complete']
     success_url = reverse_lazy('todo')
 
 class DeleteTask(LoginRequiredMixin, DeleteView):
