@@ -1,11 +1,16 @@
 {% extends 'base/main.html' %}
 {% block content %}
 
-    <form method="POST">
-        {% csrf_token%}
-        <p>Are you sure you want to delete this task? "{{task}}"</p>
-        <input type="submit" value="Delete"/>
-        <a href="{% url 'todo' %}">Cancel</a>
-    </form>
+<div class="headerbar">
+    <a href="{% url 'todo' %}">&#8592;</a>
+</div>
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token%}
+            <p>Are you sure you want to delete this task? "{{task}}"</p>
+            <input class="button" type="submit" value="Delete"/>
+            <a class="button" href="{% url 'todo' %}">Cancel</a>
+        </form>
+    </div>
 
 {% endblock content %}
