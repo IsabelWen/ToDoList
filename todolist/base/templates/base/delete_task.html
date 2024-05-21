@@ -8,8 +8,10 @@
         <form method="POST">
             {% csrf_token%}
             <p>Are you sure you want to delete this task? "{{task}}"</p>
-            <input class="button" type="submit" value="Delete"/>
-            <a class="button" href="{% url 'todo' %}">Cancel</a>
+            <div style="display: flex; justify-content: right; align-items: center; margin-right: 10px;">
+                <a style="color: #dca080; margin-right: 15px;" href="{% url 'todo' %}">Cancel</a>
+                <input class="button" type="submit" value="Delete"/>
+            </div>
         </form>
     </div>
 
