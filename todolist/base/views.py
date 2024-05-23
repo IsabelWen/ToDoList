@@ -1,5 +1,6 @@
 # Django imports
 from django.forms.models import BaseModelForm
+from django import forms
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
@@ -67,9 +68,18 @@ class TaskDetails(LoginRequiredMixin, DetailView):
     context_object_name = 'task'
     template_name = 'base/task.html'
 
+# Create a custom widget for date field
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['title', 'description', 'deadline', 'complete']
+        widgets = {
+            'deadline': forms.DateInput(attrs={'type': 'date'}),
+        }
+
 class CreateTask(LoginRequiredMixin, CreateView):
     model = Task
-    fields  = ['title', 'description', 'complete']
+    form_class = TaskForm
     success_url = reverse_lazy('todo')
 
     # Add task only to the currents user todo-list
@@ -79,7 +89,7 @@ class CreateTask(LoginRequiredMixin, CreateView):
 
 class EditTask(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = ['title', 'description', 'complete']
+    form_class = TaskForm
     success_url = reverse_lazy('todo')
 
 class DeleteTask(LoginRequiredMixin, DeleteView):

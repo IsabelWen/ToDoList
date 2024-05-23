@@ -5,6 +5,7 @@ class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True) # If User gets deleted, so will his tasks
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
+    deadline = models.DateField(null=True, blank=True)
     complete = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 

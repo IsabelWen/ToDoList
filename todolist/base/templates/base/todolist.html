@@ -17,7 +17,7 @@
         <!-- Search Form -->
         <form method="GET" class="search-form">
             <input type="text" name="search-area" value="{{search_input}}">
-            <input class="button" type="submit" value="Search">
+            <input style="margin-left: 5px" class="button" type="submit" value="Search">
         </form>
 
         <!-- Add Task Link -->
@@ -43,7 +43,7 @@
                 {% endif %}
             </div>
         {% empty %}
-        <h3>No task yet</h3>
+        <h3 style="display: flex; justify-content: center; padding-bottom: 20px;">No task yet</h3>
         {% endfor %}
     </div>
 
