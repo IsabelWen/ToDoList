@@ -74,7 +74,7 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ['title', 'description', 'deadline', 'complete']
         widgets = {
-            'deadline': forms.DateInput(attrs={'type': 'date'}),
+            'deadline': forms.DateInput(attrs={'type': 'date', 'class' : 'date-field'}),
         }
 
 class CreateTask(LoginRequiredMixin, CreateView):
