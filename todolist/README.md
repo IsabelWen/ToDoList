@@ -1,4 +1,5 @@
 # To-Do List Application
+![Screenshot1](https://github.com/IsabelWen/ToDoList/assets/85120051/6eff8754-62cf-4689-ad43-5876d02b7667)
 
 ## Project description
 The objective of this project is to develop an app for users to keep track of their daily and weekly tasks. Users can create an account, log in, and maintain a personalized to-do list. This application includes features such as task creation, editing, deletion, marking tasks as complete, adding descriptions and deadlines, and searching within the to-do list.
